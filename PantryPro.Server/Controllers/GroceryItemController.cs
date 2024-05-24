@@ -1,25 +1,15 @@
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PantryPro.Server.DataBase;
-
-
-
 
 namespace PantryPro.Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]
     public class GroceryItemController : ControllerBase
-    {
-        private static readonly string[] Descriptions = new[]
-        {
-            "Fruit", "Vegetable(s)", "Meat", "Whole grains", "Beverage", "Alcohol", "Nuts", "Oils", "Legumes"
-        };
-
+    {        
         private readonly PantryProAppContext _dbContext;
         private readonly ILogger<GroceryItemController> _logger;
-
 
         public GroceryItemController(
             PantryProAppContext dbContext,
@@ -30,7 +20,7 @@ namespace PantryPro.Server.Controllers
             _logger = logger;
         }
 
-        [HttpGet(Name = "GetGroceryItems")]
+        [HttpGet()]
         public List<GroceryItem> GetGroceryItem()
         {
             var groceryItemType = _dbContext.GroceryItem.Include("GroceryItemType");
